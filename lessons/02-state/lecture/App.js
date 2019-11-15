@@ -2,26 +2,62 @@ import "./styles.css"
 import React, { useState } from "react"
 import { FaMinus, FaPlus } from "react-icons/fa"
 
-/**********************************************************/
-// We can render with values put into variables:
-
 export default function Minutes() {
-  const minutes = 5
+  const [minutes, setMinutes] = useState(5)
+  const [error, setError] = useState(null)
+
+  const handleSubtract = () => {
+    if (minutes > 1) {
+      setMinutes(minutes - 1)
+    } else {
+      setError("Greater than 0 please 🦄")
+    }
+  }
+
+  const handleAdd = () => {
+    setMinutes(minutes + 1)
+    setError(null)
+  }
+
   return (
-    <div className="Minutes">
-      <div>
-        <button type="button" className="icon_button Minutes_button">
-          <FaMinus />
-        </button>
+    <div>
+      <div className="Minutes">
+        <div>
+          <button
+            onClick={handleSubtract}
+            type="button"
+            className="icon_button Minutes_button"
+          >
+            <FaMinus />
+          </button>
+        </div>
+        <div className="Minutes_label" htmlFor="minutes">
+          {minutes} Minutes
+        </div>
+        <div>
+          <button
+            onClick={handleAdd}
+            type="button"
+            className="icon_button Minutes_button"
+          >
+            <FaPlus />
+          </button>
+        </div>
       </div>
-      <div className="Minutes_label" htmlFor="minutes">
-        {minutes} Minutes
-      </div>
-      <div>
-        <button type="button" className="icon_button Minutes_button">
-          <FaPlus />
-        </button>
-      </div>
+      {error && (
+        <marquee>
+          <button
+            onClick={() => {
+              setError(null)
+            }}
+          >
+            Dismiss
+          </button>
+          <center>
+            <p style={{ color: "red" }}>{error}</p>
+          </center>
+        </marquee>
+      )}
     </div>
   )
 }
@@ -236,4 +272,3 @@ export default function Minutes() {
 //     </div>
 //   )
 // }
-
