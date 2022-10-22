@@ -6,10 +6,8 @@ import { login } from "app/utils"
 
 // import LoginFormFinal from './LoginForm.final'
 // export default LoginFormFinal
-
 export default function LoginForm() {
-  const [showPassword, setShowPassword] = useState(true)
-
+  const [showPassword, setShowPassword] = useState(false)
   return (
     <form>
       <VisuallyHidden>
@@ -35,12 +33,12 @@ export default function LoginForm() {
       <div>
         <label>
           <input
+            className="passwordCheckbox"
+            type="checkbox"
+            defaultChecked={false}
             onChange={() => {
               setShowPassword(!showPassword)
             }}
-            className="passwordCheckbox"
-            type="checkbox"
-            defaultChecked={showPassword}
           />{" "}
           show password
         </label>
